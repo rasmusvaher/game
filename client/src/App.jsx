@@ -106,7 +106,8 @@ function MainApp() {
     if (!user) return;
     setBackendBalanceLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/get-wallet-balance', {
+      const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+      const res = await fetch(`${API_BASE_URL}/api/get-wallet-balance`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, email: user.email })
@@ -121,7 +122,8 @@ function MainApp() {
       }
       // Fetch SOL/USD price from backend
       try {
-        const priceRes = await fetch('http://localhost:8000/api/sol-price');
+        const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+        const priceRes = await fetch(`${API_BASE_URL}/api/sol-price`);
         const priceData = await priceRes.json();
         const price = Number(priceData?.price);
         setSolUsdPrice(!isNaN(price) && price > 0 ? price : null);
@@ -181,7 +183,8 @@ function MainApp() {
         try {
           // Try to create wallet via Privy backend if missing
           if (user && user.id) {
-            const res = await fetch('http://localhost:8000/api/create-solana-wallet', {
+            const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+            const res = await fetch(`${API_BASE_URL}/api/create-solana-wallet`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ userId: user.id })
@@ -254,7 +257,8 @@ function MainApp() {
         //   setWalletLoading(false); // Removed
         //   return; // Removed
         // } // Removed
-        const res = await fetch('http://localhost:8000/api/get-wallet-balance', {
+        const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+        const res = await fetch(`${API_BASE_URL}/api/get-wallet-balance`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId: user.id, email: user.email })
@@ -324,7 +328,8 @@ function MainApp() {
     // 1. Fetch SOL/USD price from backend
     let solPrice = 0;
     try {
-      const res = await fetch('http://localhost:8000/api/sol-price');
+      const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+      const res = await fetch(`${API_BASE_URL}/api/sol-price`);
       const data = await res.json();
       solPrice = data?.price || 0;
       window.lastSolPrice = solPrice;
@@ -336,7 +341,8 @@ function MainApp() {
     let potSol = 0; // Set entry fee to 0
     let hotWalletAddr = null;
     try {
-      const joinRes = await fetch('http://localhost:8000/api/join-game', {
+      const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+      const joinRes = await fetch(`${API_BASE_URL}/api/join-game`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, solUsdPrice: solPrice })
@@ -359,7 +365,8 @@ function MainApp() {
   const handleCashout = useCallback(async () => {
     if (!user) return;
     try {
-      const res = await fetch('http://localhost:8000/api/cashout', {
+      const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
+      const res = await fetch(`${API_BASE_URL}/api/cashout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id })

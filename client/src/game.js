@@ -11,9 +11,10 @@ class TankGameClient {
         // Get parameters from URL
         this.gameParams = this.getUrlParameters();
         this.username = this.gameParams.username || 'Player';
+        const API_BASE_URL = window.API_BASE_URL || 'https://game-ucr1.onrender.com'; // Replace with your Render backend URL
         this.serverUrl = this.gameParams.server || window.location.origin;
         
-        this.socket = io("http://localhost:8000");
+        this.socket = io(API_BASE_URL);
         
         // Game state
         this.players = {};
@@ -133,7 +134,7 @@ class TankGameClient {
         // this.createPotOverlay(); // Removed
         // Fetch wallet balance from backend if privyUserId or email is provided
         if (this.privyUserId || this.email) {
-            fetch('http://localhost:8000/api/get-wallet-balance', {
+            fetch(`${API_BASE_URL}/api/get-wallet-balance`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: this.privyUserId, email: this.email })
@@ -407,7 +408,7 @@ class TankGameClient {
             // this.updatePotOverlay(); // Removed
             // Persist walletBalance in Privy
             if (this.privyUserId) {
-                fetch('http://localhost:8000/api/set-wallet-balance', {
+                fetch(`${API_BASE_URL}/api/set-wallet-balance`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userId: this.privyUserId, walletBalance: data.walletBalance })
@@ -424,7 +425,7 @@ class TankGameClient {
             // this.updatePotOverlay(); // Removed
             // Persist walletBalance in Privy
             if (this.privyUserId) {
-                fetch('http://localhost:8000/api/set-wallet-balance', {
+                fetch(`${API_BASE_URL}/api/set-wallet-balance`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userId: this.privyUserId, walletBalance: data.walletBalance })
@@ -438,7 +439,7 @@ class TankGameClient {
             // this.updatePotOverlay(); // Removed
             // Persist walletBalance in Privy
             if (this.privyUserId) {
-                fetch('http://localhost:8000/api/set-wallet-balance', {
+                fetch(`${API_BASE_URL}/api/set-wallet-balance`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userId: this.privyUserId, walletBalance: data.walletBalance })

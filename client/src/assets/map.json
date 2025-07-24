@@ -1,0 +1,17 @@
+{
+  "width": 1024,
+  "height": 768,
+  "layers": [
+    {
+      "name": "Background",
+      "data": []
+    },
+    {
+      "name": "Obstacles",
+      "objects": [
+        { "x": 300, "y": 200, "width": 200, "height": 64 },
+        { "x": 600, "y": 400, "width": 64, "height": 200 }
+      ]
+    }
+  ]
+}

@@ -23,8 +23,13 @@ app.use(cors());
 // Add body parsing middleware
 app.use(express.json());
 
-// Serve static files from client directory
-app.use(express.static(path.join(__dirname, '../client/src')));
+// Serve static files from the frontend build (dist) directory
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Serve index.html for any unknown routes (for React Router support)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 // Serve menu.html at root path
 app.get('/', (req, res) => {
